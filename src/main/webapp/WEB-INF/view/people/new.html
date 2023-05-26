@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en", xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create new person</title>
@@ -24,6 +24,7 @@
         <input type="text" th:field="*{year_of_birth}" id="year_of_birth"/>
         <div style="color: red" th:if="${#fields.hasErrors('year_of_birth')}" th:errors="*{year_of_birth}">Error</div>
 
+        <br/>
         <br/>
 
         <input type="submit" value="Create"/>
