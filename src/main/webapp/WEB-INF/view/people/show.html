@@ -10,6 +10,16 @@
     <p th:text="'Year of birth: ' + ${person.getYear_of_birth()}"></p>
     <p th:text="'Email: ' + ${person.getEmail()}"/>
 
+
+    <div th:if="${books.isEmpty()}">This person don't have a books</div>
+
+    <div th:if="${!books.isEmpty()}" th:each="book : ${books}" th:text="'Books:'">
+
+        <a th:text="${book.getTitle()} + ', '+ ${book.getAuthor()} + ', ' + ${person.getYear_of_birth()}"></a>
+
+    </div>
+
+
     <hr/>
 
     <a th:href="@{/people/{id}/edit(id=${person.getPerson_id()})}"><button>Edit</button></a>
