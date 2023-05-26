@@ -2,12 +2,12 @@ package com.sbego.library.controller;
 
 import com.sbego.library.dao.PersonDAO;
 import com.sbego.library.model.Person;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/people")
@@ -29,8 +29,9 @@ public class PeopleController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int person_id, Model model) {
         model.addAttribute("person", personDAO.show(person_id));
+        model.addAttribute("books", personDAO.checkBooks(person_id));
 
-        return "people/new";
+        return "people/show";
     }
 
     @GetMapping("/new")
@@ -38,6 +39,25 @@ public class PeopleController {
         model.addAttribute("person", new Person());
 
         return "people/new";
+    }
+
+    @PostMapping
+    public String createPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "people/new";
+        }
+
+        personDAO.save(person);
+
+        return "redirect:/people";
+    }
+
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int person_id) {
+        personDAO.delete(person_id);
+
+        return "redirect:/people";
     }
 
 }
