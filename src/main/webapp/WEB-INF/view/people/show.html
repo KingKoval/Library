@@ -6,17 +6,18 @@
 </head>
 <body>
 
-    <p th:text="${person.getName()}"></p>
-    <p th:text="${person.getYear_of_birth()}"></p>
-    <p th:text="${person.getEmail()}"/>
+    <p th:text="'Name: ' + ${person.getName()}"></p>
+    <p th:text="'Year of birth: ' + ${person.getYear_of_birth()}"></p>
+    <p th:text="'Email: ' + ${person.getEmail()}"/>
 
-
-    <br/>
     <hr/>
 
     <button href="/people/{id}/edit(id=${person.getPerson_id()})">Edit</button>
 
-    <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <br/>
+    <br/>
+
+    <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPerson_id()})}">
         <input type="submit" value="Delete">
     </form>
 </body>
