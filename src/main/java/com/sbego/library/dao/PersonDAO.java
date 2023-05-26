@@ -1,5 +1,6 @@
 package com.sbego.library.dao;
 
+import com.sbego.library.model.Book;
 import com.sbego.library.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -49,6 +50,12 @@ public class PersonDAO {
 
     public void delete(int person_id){
         jdbcTemplate.update("DELETE FROM person WHERE person_id=?", person_id);
+    }
+
+    //check person in book
+    public List<Book> checkBooks(int person_id) {
+        return jdbcTemplate.query("SELECT * FROM book WHERE person_id=?", new Object[]{person_id},
+                new BeanPropertyRowMapper<>(Book.class));
     }
 
 }
