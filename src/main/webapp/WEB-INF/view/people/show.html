@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title th:text="${person.getName()}"></title>
@@ -11,15 +11,14 @@
     <p th:text="'Email: ' + ${person.getEmail()}"/>
 
 
-    <div th:if="${books.isEmpty()}">This person don't have a books</div>
+    <div th:if="${books.isEmpty()}">This person don't have books</div>
 
-    <div th:if="${!books.isEmpty()}" th:each="book : ${books}" th:text="'Books:'">
+    <hr th:if="${!books.isEmpty()}"/>
+    <h4 th:if="${!books.isEmpty()}">Books:</h4>
+    <div th:if="${!books.isEmpty()}" th:each="book : ${books}"
+         th:text="${book.getTitle()} + ', '+ ${book.getAuthor()} + ', ' + ${book.getYear()}"></div>
 
-        <a th:text="${book.getTitle()} + ', '+ ${book.getAuthor()} + ', ' + ${person.getYear_of_birth()}"></a>
-
-    </div>
-
-
+    <br/>
     <hr/>
 
     <a th:href="@{/people/{id}/edit(id=${person.getPerson_id()})}"><button>Edit</button></a>

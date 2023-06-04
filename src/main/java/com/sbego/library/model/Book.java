@@ -13,24 +13,23 @@ public class Book {
     private String title;
 
     @NotEmpty(message = "Author should not be empty ")
+    @Size(min = 2, message = "Author should be minimum 2 characters")
     private String author;
 
-    @Min(value = 2, message = "Year should be greater than 2")
+    @Min(value = 1800, message = "Year should be greater than 1800")
     private int year;
 
 
-    private int person_id;
-
+    private Integer person_id;
 
     public Book() {
 
     }
-    public Book(int bookId, String title, String author, int year, int personId) {
-        book_id = bookId;
+
+    public Book(String title, String author, int year) {
         this.title = title;
         this.author = author;
         this.year = year;
-        person_id = personId;
     }
 
     public int getBook_id() {
@@ -65,11 +64,22 @@ public class Book {
         this.year = year;
     }
 
-    public int getPerson_id() {
+    public Integer getPerson_id() {
         return person_id;
     }
 
     public void setPerson_id(int person_id) {
         this.person_id = person_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "book_id=" + book_id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year + '\'' +
+                ", person_id='" + person_id +
+                '}';
     }
 }

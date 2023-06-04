@@ -58,4 +58,14 @@ public class Person {
     public void setYear_of_birth(int year_of_birth) {
         this.year_of_birth = year_of_birth;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "person_id=" + person_id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", year_of_birth=" + year_of_birth +
+                '}';
+    }
 }

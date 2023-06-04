@@ -1,6 +1,7 @@
 package com.sbego.library.controller;
 
 import com.sbego.library.dao.PersonDAO;
+import com.sbego.library.model.Book;
 import com.sbego.library.model.Person;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,10 @@ public class PeopleController {
     public String show(@PathVariable("id") int person_id, Model model) {
         model.addAttribute("person", personDAO.show(person_id));
         model.addAttribute("books", personDAO.checkBooks(person_id));
+
+        for (Book book : personDAO.checkBooks(person_id)){
+            System.out.println(book.toString());
+        }
 
         return "people/show";
     }
@@ -63,7 +68,7 @@ public class PeopleController {
     public String updatePerson(@PathVariable("id") int person_id,
                                @ModelAttribute("person") @Valid Person person,
                                BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors()) {
             return "people/edit";
         }
 
